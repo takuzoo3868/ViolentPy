@@ -9,7 +9,6 @@ configparser
 decorator
 entrypoints
 enum34
-functools32
 futures
 html5lib
 ipykernel
@@ -23,7 +22,7 @@ jupyter-client
 jupyter-console
 jupyter-core
 MarkupSafe
-mechanize
+MechanicalSoup
 mistune
 nbconvert
 nbformat
