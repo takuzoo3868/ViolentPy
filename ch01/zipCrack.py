@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
 Run a dictionary attack for cracking zip file passwords.
-Usage: python crackzip.py <zip_filename> <dictionary_filename>
+Usage: python zipCrack.py <zip_filename> <dictionary_filename>
 """
 import sys
 import os
