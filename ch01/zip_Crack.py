@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 """
 Run a dictionary attack for cracking zip file passwords.
-Usage: python zipCrack.py <zip_filename> <dictionary_filename>
+Usage: python zip_Crack.py <zip_filename> <dictionary_filename>
 """
 import sys
 import os
 import zipfile
-import optparse
+import argparse
 from tqdm import tqdm
 from threading import Thread
 
@@ -24,15 +24,17 @@ def extract_file(file, password):
 
 
 def main():
-    # -h help usage
-    parser = optparse.OptionParser(
-        '%prog --zipfile <secure zipfile> --test_passwords <file list of possible passwords>')
-    # -h help options
-    parser.add_option('--zipfile', dest='zipfile', type='string', default="evil.zip",
-                      help='specify zip filename to crack')
-    parser.add_option('--test_passwords', dest='test_passwords', type='string', default="dictionary.txt",
-                      help='specify file that contains list of possible passwords')
-    (options, args) = parser.parse_args()
+    parser = argparse.ArgumentParser(
+        usage="%(prog)s --zipfile <secure zipfile> --test_passwords <file list of possible passwords>",
+        description="Run a dictionary attack for cracking zip file passwords.")
+
+    parser.add_argument("--zipfile", help="specify zip filename to crack",
+                        dest="zipfile",
+                        default="evil.zip")
+    parser.add_argument("--test_passwords", help="specify file that contains list of possible passwords",
+                        dest="test_passwords",
+                        default="dictionary.txt")
+    options = parser.parse_args()
 
     with open(options.test_passwords) as dictionary_file:
         for possible_password in tqdm(dictionary_file.readlines()):
@@ -41,5 +43,5 @@ def main():
             t.start()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
