@@ -1,5 +1,6 @@
 # ViolentPy
-💻Violent Python using python3
+💻Violent Python using python3  
+このリポジトリは書籍のソースコードを一部改変したものになります．
 
 ## Violent Python
 
