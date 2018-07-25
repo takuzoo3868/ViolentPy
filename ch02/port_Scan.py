@@ -13,7 +13,7 @@ def connection_scan(host, port):
     con = socket(AF_INET, SOCK_STREAM)
     try:
         con.connect((host, port))
-        con.send(b"HOwaRey0u?\r\n")
+        con.send(b"HOwaRey0u? ViolentPython3!!!\r\n")
         ans = con.recv(100)
         _lock.acquire()
         print("[+] {}:{} TCP Connection Open!".format(host, port))
@@ -58,13 +58,14 @@ def main():
                         required=True, help="Specify target host.")
     parser.add_argument("-p", dest="target_ports", type=str,
                         required=True, help="Specify target port(s) separated by comma.")
-    parser.add_argument("-t", dest="threading", action="store_true", help="Allow threading when connecting to different hosts.")
+    parser.add_argument("-t", dest="threading", action="store_true",
+                        help="Allow threading when connecting to different hosts.")
     options = parser.parse_args()
 
     target_ports = map(int, filter(None, map(lambda p: p.strip(), options.target_ports.split(","))))
     port_scan(options.target_host, target_ports, options.threading)
 
-    print(options)
+    # print(options)
 
 
 if __name__ == "__main__":
