@@ -1,5 +1,9 @@
 # Project
-.idea
+.idea/
+ch01/evil
+pycall
+samples
+*.pdf
 vp-kali2-install.py
 
 # Byte-compiled / optimized / DLL files

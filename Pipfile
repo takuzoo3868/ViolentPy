@@ -1,0 +1,26 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+autopep8 = "*"
+flake8 = "*"
+v = {editable = true,version = "*"}
+flake8-import-order = "*"
+
+[packages]
+tqdm = "*"
+colorama = "*"
+python-nmap = "*"
+bs4 = "*"
+paramiko = "*"
+timeout-decorator = "*"
+pexpect = "*"
+
+[requires]
+python_version = "3.7"
+
+[scripts]
+lint = "flake8 --show-source ."
+format = "autopep8 -ivr ."

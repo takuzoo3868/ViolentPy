@@ -1,0 +1,3 @@
+[flake8]
+exclude = .venv, .gitignore, .git, .idea, samples, pycall
+max-line-length = 150
