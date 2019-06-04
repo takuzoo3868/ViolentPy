@@ -1,13 +1,32 @@
 #!/usr/bin/env python
-"""
-Execute a standard dictionary attack.
-Usage: python passwd_Crack.py <Hash Algorithm> <dictionary_file> <pass_file>
-"""
 
 import crypt
 import hashlib
 import argparse
 from tqdm import tqdm
+
+
+class colors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+    END = '\033[0m'
+
+
+# font Graceful
+banner = r"""{}{}
+ ____   __   ____  ____     ___  ____   __    ___  __ _ 
+(  _ \ / _\ / ___)/ ___)   / __)(  _ \ / _\  / __)(  / )
+ ) __//    \\___ \\___ \  ( (__  )   //    \( (__  )  ( 
+(__)  \_/\_/(____/(____/   \___)(__\_)\_/\_/ \___)(__\_)
+Last Modified: 22 May 2019.
+- Execute a standard dictionary attack.
+============================Written by t@kuz00E898======{}
+""".format(colors.OKGREEN, colors.BOLD, colors.END)
 
 
 def test_passwd(crypt_pass, dictionary_filename, algo):
@@ -67,6 +86,7 @@ def main():
                         default="dictionary.txt")
     options = parser.parse_args()
 
+    print(banner)
     with open(options.unknown_passwords) as unknown_passwords:
         for line in unknown_passwords.readlines():
             if ":" in line:

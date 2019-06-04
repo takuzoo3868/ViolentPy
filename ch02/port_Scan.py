@@ -6,10 +6,8 @@ from threading import Thread, Semaphore
 _lock = Semaphore(value=1)
 
 
+# From given tuple host:port, try to connect to it
 def connection_scan(host, port):
-    """
-    From given tuple host:port, try to connect to it
-    """
     con = socket(AF_INET, SOCK_STREAM)
     try:
         con.connect((host, port))
@@ -26,10 +24,8 @@ def connection_scan(host, port):
         con.close()
 
 
+# From given list of ports, try connecting given host to each port
 def port_scan(host, ports, threading=False):
-    """
-    From given list of ports, try connecting given host to each port
-    """
     try:
         host_ip = gethostbyname(host)
     except:

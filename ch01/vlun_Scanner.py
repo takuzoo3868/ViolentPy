@@ -4,6 +4,29 @@ import argparse
 from colorama import Fore, Style
 
 
+class colors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+    END = '\033[0m'
+
+
+# font Graceful
+logo = r"""{}{}
+ _  _  _  _  __    __ _    ____   ___   __   __ _ 
+/ )( \/ )( \(  )  (  ( \  / ___) / __) / _\ (  ( \
+\ \/ /) \/ (/ (_/\/    /  \___ \( (__ /    \/    /
+ \__/ \____/\____/\_)__)  (____/ \___)\_/\_/\_)__)
+Last Modified: 22 May 2019.
+- grab network banner from vlun server
+============================Written by t@kuz00E898======{}
+""".format(colors.OKGREEN, colors.BOLD, colors.END)
+
+
 def get_banner(ip, port, timeout):
     socket.setdefaulttimeout(timeout)
     s = socket.socket()
@@ -18,14 +41,8 @@ def get_banner(ip, port, timeout):
         print("{}[-]{} Unable to grab any information: {}".format(Fore.RED, Style.RESET_ALL, ip, port, e))
         return None
 
-
+# Check for known vulnerable services against a pre-defined list of banners.
 def check_vulnerabilities(banner, filename):
-    """
-    Check for known vulnerable services against a pre-defined list of banners.
-
-    :param banner: Banner being checked; type: str
-    :param filename: List of vulnerability banners
-    """
     with open(filename, "r") as f:
         for line in f.readlines():
             if line.strip("\n") in banner:
@@ -35,18 +52,8 @@ def check_vulnerabilities(banner, filename):
 
 
 def main():
-    parser = argparse.ArgumentParser(usage="%(prog)s -n <network>")
-
-    """
-    options default
-    ---------------
-    network     : 192.168.58.x
-    subnet start: 1
-    subnet end  : 5
-    ports       : telnet, ssh, smtp, http, imap and https
-    timeout     : 2   
-    """
-    parser.add_argument("-n", "--network", help="specify network to search on",
+    parser = argparse.ArgumentParser(usage="%(prog)s -n <IP address>")
+    parser.add_argument("-n", "--network", help="specify IP address to search on",
                         dest="network",
                         default="192.168.58.X")
     parser.add_argument("-start", "--start_subnet", help="specify which subnet should the scan start",
@@ -65,6 +72,8 @@ def main():
                         dest="socket_timeout",
                         type=int, default=2)
     options = parser.parse_args()
+
+    print(logo)
 
     subnet = options.network.lower()
     subnet_string = subnet.replace("x", "{}")
