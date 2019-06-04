@@ -38,9 +38,9 @@ def ftp_login(hostname, username, password):
     return None, None
 
 
-if __name__ == "__main__":
+def main():
     print(banner)
-    parser = ArgumentParser(usage="%(prog)s-H <target host> -F <password lis>")
+    parser = argparse.ArgumentParser(usage="%(prog)s-H <target host> -F <password lis>")
     parser.add_argument("-H", dest="target_host", type=str, required=True, help="Specify target host.")
     parser.add_argument("-F", dest="password_file", type=str, required=True,
                         help="Specify file containing all possible user:passwords combinations.")
@@ -52,3 +52,7 @@ if __name__ == "__main__":
         password = line.split(":")[1].strip("\r").strip("\n")
         print("[*] Testing: {}:{}".format(username, password))
         ftp_login(options.target_host, username, password)
+
+
+if __name__ == "__main__":
+    main()
