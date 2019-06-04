@@ -6,6 +6,26 @@ from threading import Thread, Semaphore
 _lock = Semaphore(value=1)
 
 
+class colors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+    END = '\033[0m'
+
+
+banner = r"""{}{}
+ ____   __  ____  ____    ____   ___   __   __ _ 
+(  _ \ /  \(  _ \(_  _)  / ___) / __) / _\ (  ( \
+ ) __/(  O ))   /  )(    \___ \( (__ /    \/    /
+(__)   \__/(__\_) (__)   (____/ \___)\_/\_/\_)__)
+============================Written by t@kuz00E898======{}
+""".format(colors.OKGREEN, colors.BOLD, colors.END)
+
+
 # From given tuple host:port, try to connect to it
 def connection_scan(host, port):
     con = socket(AF_INET, SOCK_STREAM)
@@ -49,6 +69,8 @@ def port_scan(host, ports, threading=False):
 
 
 def main():
+    print(banner)
+
     parser = argparse.ArgumentParser(usage="%(prog)s -H <target host> -p <target_port(s)>")
     parser.add_argument("-H", dest="target_host", type=str,
                         required=True, help="Specify target host.")
