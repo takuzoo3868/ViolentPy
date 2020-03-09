@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-import ftplib
 import argparse
+import ftplib
 
 
 class colors:

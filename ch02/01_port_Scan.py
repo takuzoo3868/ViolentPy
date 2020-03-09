@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-from socket import *
 import argparse
-from threading import Thread, Semaphore
+from socket import *
+from threading import Semaphore, Thread
 
 _lock = Semaphore(value=1)
 

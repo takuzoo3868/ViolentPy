@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
+import argparse
 import crypt
 import hashlib
-import argparse
+
 from tqdm import tqdm
 
 

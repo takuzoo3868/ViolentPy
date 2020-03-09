@@ -1,9 +1,11 @@
 #!/usr/bin/env python
-import os, sys
-import urllib.request
 import io
-import bs4 as bs
+import os
 import ssl
+import sys
+import urllib.request
+
+import bs4 as bs
 
 
 class colors:

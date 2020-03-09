@@ -1,10 +1,11 @@
 #!/usr/bin/env python
-import sys
-import os
-import zipfile
 import argparse
-from tqdm import tqdm
+import os
+import sys
+import zipfile
 from threading import Thread
+
+from tqdm import tqdm
 
 
 class colors:

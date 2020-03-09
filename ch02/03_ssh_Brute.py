@@ -1,9 +1,10 @@
 #!/usr/bin/env python
+import argparse
 import os
 import time
-import argparse
-from pexpect import pxssh
 from threading import *
+
+from pexpect import pxssh
 
 maxConnections = 5
 connection_lock = BoundedSemaphore(value=maxConnections)

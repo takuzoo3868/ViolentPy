@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 import cmd
 import os
-import paramiko
 import socket
+
+import paramiko
 import timeout_decorator
-from paramiko import SSHClient, AutoAddPolicy
+from paramiko import AutoAddPolicy, SSHClient
 
 botnet = []
 

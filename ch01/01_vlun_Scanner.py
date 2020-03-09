@@ -1,6 +1,7 @@
 #!/usr/bin/env python
-import socket
 import argparse
+import socket
+
 from colorama import Fore, Style
 
 
@@ -42,6 +43,8 @@ def get_banner(ip, port, timeout):
         return None
 
 # Check for known vulnerable services against a pre-defined list of banners.
+
+
 def check_vulnerabilities(banner, filename):
     with open(filename, "r") as f:
         for line in f.readlines():
